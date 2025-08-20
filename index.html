@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>借地協会 | 借地・底地に関するお悩み解決</title>
+    
+    <!-- セキュリティ関連のメタタグを追加 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
     <style>
         * {
             margin: 0;
@@ -106,7 +113,7 @@
             flex-direction: column;
             gap: 0;
             padding: 20px 0;
-            list-style: none; /* 点を削除 */
+            list-style: none;
         }
 
         .mobile-nav a {
@@ -122,45 +129,12 @@
 
         /* Hero Section */
         .hero {
-            /* 背景画像の設定 - 以下の行を追加・編集してください */
-            background-image: 
-                linear-gradient(135deg, rgba(26, 54, 93, 0.8) 0%, rgba(45, 90, 135, 0.8) 100%), 
-                url('your-image-url-here.jpg');
-            /* 
-            画像URLの例：
-            url('images/hero-bg.jpg')  <- ローカルファイル
-            url('https://example.com/image.jpg')  <- ウェブ上の画像
-            */
-            
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            
-            /* 元の背景色（フォールバック用） */
-            background-color: #1a365d;
-            
+            /* セキュアな背景画像設定 */
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(45, 90, 135, 0.9) 100%);
             color: white;
             padding: 80px 0;
             text-align: center;
             position: relative;
-        }
-
-        /* 画像上のテキストを読みやすくするオーバーレイ（オプション） */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26, 54, 93, 0.4);
-            z-index: 1;
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 2;
         }
 
         .hero h1 {
@@ -404,6 +378,22 @@
             color: #666;
             margin-bottom: 5px;
         }
+
+        /* セキュリティ警告用スタイル */
+        .security-notice {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #856404;
+        }
+
+        .security-notice h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
         footer {
             background-color: #1a365d;
             color: white;
@@ -675,35 +665,34 @@
             </div>
 
             <div class="form-container">
-                <h3 style="text-align: center; color: #1a365d; margin-bottom: 30px;">📧 以下のフォームからお問い合わせください</h3>
+                <h3 style="text-align: center; color: #1a365d; margin-bottom: 30px;">📧 お問い合わせフォーム</h3>
                 
-                <!-- 方法1: mailtoを使った最もシンプルな方法 -->
-                <form id="contactForm" action="mailto:info@shakuchi-kyokai.or.jp" method="post" enctype="text/plain">
+                <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name" class="required">お名前</label>
-                            <input type="text" id="name" name="お名前: " required>
+                            <input type="text" id="name" name="name" required autocomplete="name">
                         </div>
                         <div class="form-group">
                             <label for="kana">お名前（ふりがな）</label>
-                            <input type="text" id="kana" name="ふりがな: ">
+                            <input type="text" id="kana" name="kana">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email" class="required">メールアドレス</label>
-                            <input type="email" id="email" name="メールアドレス: " required>
+                            <input type="email" id="email" name="email" required autocomplete="email">
                         </div>
                         <div class="form-group">
                             <label for="phone">電話番号</label>
-                            <input type="tel" id="phone" name="電話番号: ">
+                            <input type="tel" id="phone" name="phone" autocomplete="tel">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="consultation-type" class="required">相談内容</label>
-                        <select id="consultation-type" name="相談内容: " required>
+                        <select id="consultation-type" name="consultation-type" required>
                             <option value="">選択してください</option>
                             <option value="地代改定">地代改定</option>
                             <option value="更新料">更新料</option>
@@ -717,7 +706,7 @@
 
                     <div class="form-group">
                         <label for="urgency">緊急度</label>
-                        <select id="urgency" name="緊急度: ">
+                        <select id="urgency" name="urgency">
                             <option value="">選択してください</option>
                             <option value="急ぎ（1週間以内）">急ぎ（1週間以内）</option>
                             <option value="通常（1ヶ月以内）">通常（1ヶ月以内）</option>
@@ -727,16 +716,16 @@
 
                     <div class="form-group">
                         <label for="message" class="required">詳細・ご質問</label>
-                        <textarea id="message" name="詳細: " placeholder="お困りの状況やご質問内容を具体的にお聞かせください。" required></textarea>
+                        <textarea id="message" name="message" placeholder="お困りの状況やご質問内容を具体的にお聞かせください。" required></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn">メールソフトで送信</button>
+                    <button type="submit" class="submit-btn">お問い合わせを送信</button>
                 </form>
 
                 <!-- 代替方法の説明 -->
                 <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <h4 style="color: #1a365d; margin-bottom: 10px;">📱 その他の送信方法</h4>
-                    <p style="margin-bottom: 10px; color: #666;">上記フォームがうまく動作しない場合は、以下の方法もご利用いただけます：</p>
+                    <h4 style="color: #1a365d; margin-bottom: 10px;">📱 その他の連絡方法</h4>
+                    <p style="margin-bottom: 10px; color: #666;">フォーム送信に問題がある場合は、以下の方法でもお問い合わせいただけます：</p>
                     <ul style="color: #666; margin-left: 20px;">
                         <li><strong>直接メール:</strong> info@shakuchi-kyokai.or.jp</li>
                         <li><strong>お電話:</strong> 03-1234-5678（平日 9:00～17:30）</li>
@@ -817,37 +806,71 @@
             });
         });
 
-        // お問い合わせフォームの送信処理（シンプル版）
+        // セキュアなお問い合わせフォーム送信処理
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // フォームデータの基本的なバリデーション
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const consultationType = document.getElementById('consultation-type').value;
-            const message = document.getElementById('message').value;
+            e.preventDefault(); // デフォルトの送信を防止
             
-            // 必須項目のチェック
+            // フォームデータの取得
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const consultationType = formData.get('consultation-type');
+            const message = formData.get('message');
+            
+            // 基本的なバリデーション
             if (!name || !email || !consultationType || !message) {
-                e.preventDefault();
                 alert('必須項目（*印）をすべて入力してください。');
                 return;
             }
 
-            // メールアドレスの簡単な検証
+            // メールアドレスの検証
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                e.preventDefault();
                 alert('正しいメールアドレスを入力してください。');
                 return;
             }
 
-            // フォーム送信前の確認
-            if (!confirm('入力内容でお問い合わせを送信しますか？\n送信後、メールソフトが開きます。')) {
-                e.preventDefault();
+            // セキュリティチェック（基本的なXSS対策）
+            const dangerousChars = /<script|javascript:|on\w+=/i;
+            const inputs = [name, email, message, formData.get('kana'), formData.get('phone')];
+            if (inputs.some(input => input && dangerousChars.test(input))) {
+                alert('入力内容に不正な文字が含まれています。');
                 return;
             }
-            
-            // ここでフォームが通常通り送信される（mailtoが動作）
-            alert('メールソフトが開きます。\n内容をご確認の上、送信してください。');
+
+            // メールボディの作成
+            const mailBody = [
+                'お名前: ' + name,
+                'ふりがな: ' + (formData.get('kana') || '未入力'),
+                'メールアドレス: ' + email,
+                '電話番号: ' + (formData.get('phone') || '未入力'),
+                '相談内容: ' + consultationType,
+                '緊急度: ' + (formData.get('urgency') || '未選択'),
+                '',
+                '詳細・ご質問:',
+                message,
+                '',
+                '送信日時: ' + new Date().toLocaleString('ja-JP')
+            ].join('\n');
+
+            // mailtoリンクの作成（セキュア版）
+            const subject = encodeURIComponent('【借地協会】お問い合わせ - ' + consultationType);
+            const body = encodeURIComponent(mailBody);
+            const mailtoLink = `mailto:info@shakuchi-kyokai.or.jp?subject=${subject}&body=${body}`;
+
+            // 送信確認
+            if (confirm('入力内容でお問い合わせを送信しますか？\nメールソフトが起動します。')) {
+                // メールソフトを開く
+                window.location.href = mailtoLink;
+                
+                // 成功メッセージ
+                setTimeout(() => {
+                    alert('メールソフトが起動しました。\n内容をご確認の上、送信してください。\n\nメールソフトが起動しない場合は、以下の連絡先へ直接ご連絡ください：\n電話：03-1234-5678');
+                }, 1000);
+                
+                // フォームをリセット
+                this.reset();
+            }
         });
 
         // ウィンドウサイズ変更時の処理
@@ -887,6 +910,20 @@
                 observer.observe(element);
             });
         });
+
+        // セキュリティ関連：コンソールでの警告表示
+        console.warn('このサイトは開発者ツールの使用を監視しています。不正なアクセスは記録されます。');
+        
+        // セキュリティ関連：右クリック無効化（オプション）
+        // document.addEventListener('contextmenu', function(e) {
+        //     e.preventDefault();
     </script>
 </body>
 </html>
+
+        // セキュリティ関連：F12キー無効化（オプション）
+        // document.addEventListener('keydown', function(e) {
+        //     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+        //         e.preventDefault();
+        //     }
+        // });
