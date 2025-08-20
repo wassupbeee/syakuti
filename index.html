@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>借地協会 | 借地・底地に関するお悩み解決</title>
+    <title>一般社団法人 借地協会 | 借地・底地に関するお悩み解決</title>
     <style>
         * {
             margin: 0;
@@ -106,6 +106,7 @@
             flex-direction: column;
             gap: 0;
             padding: 20px 0;
+            list-style: none; /* 点を削除 */
         }
 
         .mobile-nav a {
@@ -121,10 +122,45 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1a365d 0%, #2d5a87 100%);
+            /* 背景画像の設定 - 以下の行を追加・編集してください */
+            background-image: 
+                linear-gradient(135deg, rgba(26, 54, 93, 0.8) 0%, rgba(45, 90, 135, 0.8) 100%), 
+                url('your-image-url-here.jpg');
+            /* 
+            画像URLの例：
+            url('images/hero-bg.jpg')  <- ローカルファイル
+            url('https://example.com/image.jpg')  <- ウェブ上の画像
+            */
+            
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+            /* 元の背景色（フォールバック用） */
+            background-color: #1a365d;
+            
             color: white;
             padding: 80px 0;
             text-align: center;
+            position: relative;
+        }
+
+        /* 画像上のテキストを読みやすくするオーバーレイ（オプション） */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 54, 93, 0.4);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -482,7 +518,7 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">借地協会</a>
+                <a href="#" class="logo">一般社団法人 借地協会</a>
                 <nav>
                     <ul>
                         <li><a href="#home">ホーム</a></li>
@@ -519,7 +555,7 @@
             <h2 class="section-title">協会について</h2>
             <div class="about-content">
                 <p>
-                    借地協会は、借地権・底地権に関する問題解決を専門とする団体です。
+                    一般社団法人借地協会は、借地権・底地権に関する問題解決を専門とする団体です。
                     長年にわたって培ってきた豊富な知識と経験を活かし、地主様・借地人様双方にとって
                     最適な解決策をご提案しております。
                 </p>
@@ -702,7 +738,7 @@
                     <h4 style="color: #1a365d; margin-bottom: 10px;">📱 その他の送信方法</h4>
                     <p style="margin-bottom: 10px; color: #666;">上記フォームがうまく動作しない場合は、以下の方法もご利用いただけます：</p>
                     <ul style="color: #666; margin-left: 20px;">
-                        <li><strong>直接メール:</strong> info@shakuchi.jp</li>
+                        <li><strong>直接メール:</strong> info@shakuchi-kyokai.or.jp</li>
                         <li><strong>お電話:</strong> 03-1234-5678（平日 9:00～17:30）</li>
                         <li><strong>FAX:</strong> 03-1234-5679</li>
                     </ul>
@@ -717,7 +753,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>協会情報</h3>
-                    <p><strong>借地協会</strong></p>
+                    <p><strong>一般社団法人 借地協会</strong></p>
                     <p>〒100-0001</p>
                     <p>東京都千代田区千代田1-1-1</p>
                     <p>千代田ビル5階</p>
@@ -726,7 +762,7 @@
                     <h3>お問い合わせ</h3>
                     <p><strong>TEL:</strong> 03-1234-5678</p>
                     <p><strong>FAX:</strong> 03-1234-5679</p>
-                    <p><strong>Email:</strong> info@shakuchi.jp</p>
+                    <p><strong>Email:</strong> info@shakuchi-kyokai.or.jp</p>
                     <p><strong>受付時間:</strong> 平日 9:00～17:30</p>
                 </div>
                 <div class="footer-section">
@@ -738,7 +774,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 借地協会. All Rights Reserved.</p>
+                <p>&copy; 2024 一般社団法人 借地協会. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
