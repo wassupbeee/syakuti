@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一般社団法人 借地協会 | 借地・底地に関するお悩み解決</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Meiryo", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a365d;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "🏠";
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1a365d;
+            color: white;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1a365d;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-btn.active {
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .mobile-nav.show {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            flex-direction: column;
+            gap: 0;
+            padding: 20px 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 15px 30px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-nav a:hover {
+            background-color: #f8f9fa;
+            color: #1a365d;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a87 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section:nth-child(even) {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #1a365d;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #38a169;
+            margin: 15px auto 0;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #38a169;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #38a169;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .form-group label.required::after {
+            content: " *";
+            color: #e53e3e;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #38a169;
+            box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+            display: block;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 161, 105, 0.3);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-method {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method-icon {
+            font-size: 3rem;
+            color: #38a169;
+            margin-bottom: 15px;
+        }
+
+        .contact-method h3 {
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+
+        .contact-method p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: #38a169;
+        }
+
+        .footer-section p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d5a87;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .header-content {
+                position: relative;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .service-card {
+                padding: 25px 20px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">一般社団法人 借地協会</a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">ホーム</a></li>
+                        <li><a href="#about">協会について</a></li>
+                        <li><a href="#services">相談内容</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-nav">
+                    <ul>
+                        <li><a href="#home">ホーム</a></li>
+                        <li><a href="#about">協会について</a></li>
+                        <li><a href="#services">相談内容</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>借地・底地に関するお悩み解決</h1>
+            <p>借地権・底地権に関する複雑な問題を、豊富な経験と専門知識でサポートいたします。<br>
+            お一人お一人のケースに合わせた最適なソリューションをご提案します。</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">協会について</h2>
+            <div class="about-content">
+                <p>
+                    一般社団法人借地協会は、借地権・底地権に関する問題解決を専門とする団体です。
+                    長年にわたって培ってきた豊富な知識と経験を活かし、地主様・借地人様双方にとって
+                    最適な解決策をご提案しております。
+                </p>
+                <p>
+                    借地・底地に関する法律や制度は複雑で、個々のケースによって最適な対応が異なります。
+                    当協会では、専門的な知識を持つスタッフが丁寧にお話をお伺いし、
+                    お客様のご事情に応じたきめ細やかなサポートを行っております。
+                </p>
+                <p>
+                    相続、売買、建替え、地代改定など、様々な場面でのお困りごとに対応しており、
+                    多くのお客様から信頼をいただいております。まずはお気軽にご相談ください。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title">相談できる内容</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>地代改定</h3>
+                    <p>適正な地代の算定から改定手続きまで、地代に関する様々な問題について専門的なアドバイスを提供いたします。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>更新料</h3>
+                    <p>借地契約の更新に伴う更新料の算定や交渉について、法的根拠に基づいた適切なサポートを行います。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>建替承諾</h3>
+                    <p>建物の建替えに必要な地主の承諾取得から承諾料の交渉まで、スムーズな建替え実現をサポートします。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>借地権売買</h3>
+                    <p>借地権の売買に関する複雑な手続きや価格査定について、豊富な経験に基づいたアドバイスを提供します。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>相続問題</h3>
+                    <p>借地権・底地権の相続に関する税務上の問題や手続きについて、専門的な観点からサポートいたします。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>紛争解決</h3>
+                    <p>地主と借地人間のトラブルについて、円満解決を目指した調停や仲裁のサポートを行います。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">ご相談の流れ</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>お問い合わせ</h3>
+                    <p>お電話またはメールフォームより、お気軽にお問い合わせください。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>初回相談</h3>
+                    <p>専門スタッフがお話をお伺いし、現状の把握と問題点を整理いたします。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>調査・分析</h3>
+                    <p>必要に応じて現地調査や法的調査を行い、詳細な分析を実施いたします。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>解決案提示</h3>
+                    <p>お客様の状況に最適な解決策を複数パターンご提案いたします。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>実行支援</h3>
+                    <p>決定した解決策の実行を全面的にサポートし、完了まで伴走いたします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ</h2>
+            
+            <div class="contact-info">
+                <div class="contact-method">
+                    <div class="contact-method-icon">📞</div>
+                    <h3>お電話でのご相談</h3>
+                    <p><strong>03-1234-5678</strong></p>
+                    <p>平日 9:00～17:30</p>
+                    <p>初回相談無料</p>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-method-icon">✉️</div>
+                    <h3>メールでのご相談</h3>
+                    <p><strong>info@shakuchi-kyokai.or.jp</strong></p>
+                    <p>24時間受付</p>
+                    <p>48時間以内に返信</p>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-method-icon">🏢</div>
+                    <h3>ご来所でのご相談</h3>
+                    <p><strong>完全予約制</strong></p>
+                    <p>平日 9:00～17:30</p>
+                    <p>土日も対応可（要相談）</p>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <h3 style="text-align: center; color: #1a365d; margin-bottom: 30px;">📧 以下のフォームからお問い合わせください</h3>
+                
+                <!-- 方法1: mailtoを使った最もシンプルな方法 -->
+                <form id="contactForm" action="mailto:info@shakuchi-kyokai.or.jp" method="post" enctype="text/plain">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="required">お名前</label>
+                            <input type="text" id="name" name="お名前: " required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kana">お名前（ふりがな）</label>
+                            <input type="text" id="kana" name="ふりがな: ">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="required">メールアドレス</label>
+                            <input type="email" id="email" name="メールアドレス: " required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">電話番号</label>
+                            <input type="tel" id="phone" name="電話番号: ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consultation-type" class="required">相談内容</label>
+                        <select id="consultation-type" name="相談内容: " required>
+                            <option value="">選択してください</option>
+                            <option value="地代改定">地代改定</option>
+                            <option value="更新料">更新料</option>
+                            <option value="建替承諾">建替承諾</option>
+                            <option value="借地権売買">借地権売買</option>
+                            <option value="相続問題">相続問題</option>
+                            <option value="紛争解決">紛争解決</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="urgency">緊急度</label>
+                        <select id="urgency" name="緊急度: ">
+                            <option value="">選択してください</option>
+                            <option value="急ぎ（1週間以内）">急ぎ（1週間以内）</option>
+                            <option value="通常（1ヶ月以内）">通常（1ヶ月以内）</option>
+                            <option value="相談のみ">相談のみ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="required">詳細・ご質問</label>
+                        <textarea id="message" name="詳細: " placeholder="お困りの状況やご質問内容を具体的にお聞かせください。" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">メールソフトで送信</button>
+                </form>
+
+                <!-- 代替方法の説明 -->
+                <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <h4 style="color: #1a365d; margin-bottom: 10px;">📱 その他の送信方法</h4>
+                    <p style="margin-bottom: 10px; color: #666;">上記フォームがうまく動作しない場合は、以下の方法もご利用いただけます：</p>
+                    <ul style="color: #666; margin-left: 20px;">
+                        <li><strong>直接メール:</strong> info@shakuchi-kyokai.or.jp</li>
+                        <li><strong>お電話:</strong> 03-1234-5678（平日 9:00～17:30）</li>
+                        <li><strong>FAX:</strong> 03-1234-5679</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>協会情報</h3>
+                    <p><strong>一般社団法人 借地協会</strong></p>
+                    <p>〒100-0001</p>
+                    <p>東京都千代田区千代田1-1-1</p>
+                    <p>千代田ビル5階</p>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p><strong>TEL:</strong> 03-1234-5678</p>
+                    <p><strong>FAX:</strong> 03-1234-5679</p>
+                    <p><strong>Email:</strong> info@shakuchi-kyokai.or.jp</p>
+                    <p><strong>受付時間:</strong> 平日 9:00～17:30</p>
+                </div>
+                <div class="footer-section">
+                    <h3>営業日</h3>
+                    <p>月曜日～金曜日</p>
+                    <p>（土日祝日、年末年始は休業）</p>
+                    <p></p>
+                    <p><strong>初回相談:</strong> 無料</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 一般社団法人 借地協会. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // モバイルメニューの開閉
+        function toggleMobileMenu() {
+            const mobileNav = document.querySelector('.mobile-nav');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            mobileNav.classList.toggle('show');
+            menuBtn.classList.toggle('active');
+        }
+
+        // モバイルメニューのリンクをクリックしたら閉じる
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const mobileNav = document.querySelector('.mobile-nav');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                
+                mobileNav.classList.remove('show');
+                menuBtn.classList.remove('active');
+            });
+        });
+
+        // スムーススクロール（ヘッダー分のオフセット調整）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20; // 20pxの余裕を追加
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // お問い合わせフォームの送信処理（シンプル版）
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // フォームデータの基本的なバリデーション
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const consultationType = document.getElementById('consultation-type').value;
+            const message = document.getElementById('message').value;
+            
+            // 必須項目のチェック
+            if (!name || !email || !consultationType || !message) {
+                e.preventDefault();
+                alert('必須項目（*印）をすべて入力してください。');
+                return;
+            }
+
+            // メールアドレスの簡単な検証
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                alert('正しいメールアドレスを入力してください。');
+                return;
+            }
+
+            // フォーム送信前の確認
+            if (!confirm('入力内容でお問い合わせを送信しますか？\n送信後、メールソフトが開きます。')) {
+                e.preventDefault();
+                return;
+            }
+            
+            // ここでフォームが通常通り送信される（mailtoが動作）
+            alert('メールソフトが開きます。\n内容をご確認の上、送信してください。');
+        });
+
+        // ウィンドウサイズ変更時の処理
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                const mobileNav = document.querySelector('.mobile-nav');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                
+                mobileNav.classList.remove('show');
+                menuBtn.classList.remove('active');
+            }
+        });
+
+        // ページロード時のアニメーション
+        window.addEventListener('load', () => {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const steps = document.querySelectorAll('.step');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            [...serviceCards, ...steps].forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
